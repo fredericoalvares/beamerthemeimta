@@ -1,0 +1,351 @@
+%
+% Autor: Frederico Alvares <fredericoalvares@gmail.com
+%
+
+\ProvidesPackage{beamerthemeimta}[2017/04/10]
+\usepackage{eso-pic}
+\usepackage{etoolbox}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tikz} 
+\usetheme{default}
+\useoutertheme{infolines}
+
+
+\ProcessOptions
+
+\mode<presentation>
+
+\newcommand\twodigits[1]{%
+   \ifnum#1<10 0#1\else #1\fi
+}
+
+\def\insertnavigation#1{\relax}
+\useoutertheme[subsection=false,shadow]{miniframes}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+
+
+\setlength{\parskip}{0.5em}
+%\setlength{\itemsep}{1em}
+\setlist[itemize]{itemsep=0.25cm}
+\setlist[itemize,1]{label=$\bullet$}
+\setlist[itemize,2]{label=$\circ$}
+\setlist[itemize,3]{label=$\rightarrow$}
+\setlist[itemize,4]{label=$\minus$}
+\setlist[enumerate]{itemsep=0.25cm}
+\setlist[enumerate,1]{%
+  label=\arabic*.,
+}
+
+
+\setbeamertemplate{navigation symbols}{}
+\renewcommand{\sfdefault}{lmss}
+\sffamily
+
+\definecolor{imtaGreen}{RGB}{153,204,51}
+\definecolor{imtaDarkGreen}{RGB}{164,210,51}
+\definecolor{frametitleBar}{RGB}{217,225,226}
+
+\definecolor{imtaWarmGreyDark}{rgb}{0.274509804,0.254901961,0.235294118}
+\definecolor{imtaRed}{rgb}{0.882352941,0,0.098039216}
+\definecolor{imtaRedDark}{rgb}{0.588235294,0,0.058823529}
+
+% General
+\setbeamercolor{normal text}{fg=imtaWarmGreyDark}
+\setbeamercolor{structure}{fg=imtaWarmGreyDark}
+\setbeamercolor{alerted text}{fg=imtaRed}
+\setbeamercolor{example text}{fg=white}
+\setbeamercolor{copyright text}{fg=inriaWarmGreyLight}
+
+%---------------------------------------------------------------------
+% Colors
+%---------------------------------------------------------------------
+
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{subtitle}{fg=white}
+\setbeamercolor{institute}{fg=white}
+\setbeamercolor{author}{fg=white}
+\setbeamercolor{date}{fg=white}
+\setbeamercolor{section title}{fg=white}
+\setbeamercolor{section subtitle}{fg=white}
+\setbeamercolor{page number in head/foot}{fg=imtaDarkGreen}
+\setbeamercolor{author in head/foot}{fg=gray,bg=}
+\setbeamercolor{title in head/foot}{fg=gray,bg=}
+\setbeamercolor{author with bg in head/foot}{fg=white,bg=}
+\setbeamercolor{title with bg in head/foot}{fg=white,bg=}
+\setbeamercolor{thanks}{fg=white}
+
+% Blocks
+\setbeamercolor{block title}{fg=white,bg=inriaWarmGreyLight}
+\setbeamercolor{block body}{fg=black, bg={gray!20}}
+\setbeamercolor{block title example}{fg=white, bg=inriaSec1Dark}
+\setbeamercolor{block body example}{fg=white, bg=inriaSec1}
+\setbeamercolor{block title alerted}{fg=white, bg=imtaRedDark}
+\setbeamercolor{block body alerted}{fg=white, bg=imtaRed}
+%frametitle
+\setbeamercolor{frametitle}{fg=black, bg=frametitleBar}
+\setbeamercolor{headline}{fg=imtaWarmGreyDark, bg=}
+%
+
+
+\setbeamercolor{section number in toc}{fg=imtaDarkGreen}
+\setbeamercolor{section name in toc}{fg=black}
+%---------------------------------------------------------------------
+% Fonts
+%---------------------------------------------------------------------
+
+\setbeamerfont{title}{size=\LARGE}
+\setbeamerfont{frametitle}{size=\Large}
+\setbeamerfont{subtitle}{size=\Large}
+\setbeamerfont{date}{size=\normalsize}
+\setbeamerfont{author}{size=\large}
+\setbeamerfont{institute}{size=\normalsize}
+\setbeamerfont{section title}{size=\Huge}
+\setbeamerfont{section subtitle}{size=\large}
+\setbeamerfont{page number in head/foot}{size=\normalsize}
+\setbeamerfont{title in head/foot}{size=\tiny}
+\setbeamerfont{author in head/foot}{size=\tiny}
+\setbeamerfont{thanks}{size=\Huge}
+\setbeamerfont{section number in toc}{size=\large}
+\setbeamerfont{section name in toc}{size=\large}
+%\setbeamerfont{normal text}{size=\fontsize{40}{48}}
+
+%---------------------------------------------------------------------
+% Titlepage
+%---------------------------------------------------------------------
+\setbeamerfont{caption name}{}
+
+
+\def\maketitle{	
+	\setbeamertemplate{background canvas}{\includegraphics[width=\paperwidth,height=\paperheight]{figures/cover}} 
+	\begin{frame}[plain]
+	\vspace{5em}
+	%\vfill	
+	\ifx\inserttitle\@empty%
+	\else%
+	
+	{
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\end{column}
+\begin{column}{0.67\textwidth}  %%<--- here
+    \begin{center}
+	\begin{flushright} 	
+		\usebeamerfont{title}\usebeamercolor[fg]{title}\MakeUppercase{\inserttitle}\par%
+	\ifx\insertsubtitle\@empty%
+	\else%
+		{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+	\fi%
+	\vfill
+	 \end{flushright}
+     \end{center}
+\end{column}
+\end{columns}
+	  	}
+	\fi%
+	\vfill	
+	%	\vspace*{3em}
+	\ifx\insertauthor\@empty%
+	\else%
+	\vspace{5em}
+	\hspace{0.35cm}{\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
+	\fi%
+	\ifx\insertinstitut\@empty%
+	\else%
+		
+		\hspace{0.35cm}{\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}%
+	\fi% 
+	%\vfill
+\ifx\insertdate\@empty%
+	\else%
+	\hspace{0.35cm}{\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}%
+	\fi% 
+	
+\vspace{0.2em}
+
+	\end{frame}
+	
+	\setbeamertemplate{background canvas}{} 	
+}
+
+
+
+
+\def\makeoutline{	
+	%\ifbeamer@inframe\titlepage\else\frame[plain]{\titlepage}\fi
+{
+\setbeamertemplate{footline}{} 
+\setbeamertemplate{section in toc}{{\bf \usebeamerfont{section number in toc}\usebeamercolor[fg]{section number in toc}\twodigits{\inserttocsectionnumber}.}~{\usebeamerfont{section name in toc}\usebeamercolor[fg]{section name in toc}\inserttocsection}}
+\setbeamertemplate{background canvas}{\includegraphics[width=\paperwidth,height=\paperheight]{figures/outline}} 
+\begin{frame}[plain]
+	\vspace{0.5em}
+\usebeamerfont{title}\usebeamercolor[fg]{title}\MakeUppercase{Outline}\par
+\vfill
+%
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\end{column}
+\begin{column}{0.6\textwidth}  %%<--- here
+\tableofcontents
+\end{column}
+\end{columns}
+\vfill
+\end{frame}
+}
+}
+
+
+
+\setbeamertemplate{headline}{}
+
+%---------------------------------------------------------------------
+% Section pages
+%---------------------------------------------------------------------
+
+% Make Sectionhead uppercase
+\newcommand{\insertsectionHEAD}{%
+	\expandafter\insertsectionHEADaux\insertsectionhead}
+	\newcommand{\insertsectionHEADaux}[3]{\MakeUppercase{#3}
+}
+
+\newcommand{\insertsubsectionHEAD}{%
+	\expandafter\insertsubsectionHEADaux\insertsubsectionhead}
+	\newcommand{\insertsubsectionHEADaux}[3]{\MakeUppercase{#3}
+}
+
+% Insert frame with section title at every section start
+\AtBeginSection[]
+{
+
+%%-------------------------------
+%% Section title frame
+%%-------------------------------
+%
+{
+\setbeamertemplate{background canvas}{\includegraphics[width=\paperwidth,height=\paperheight]{figures/section}} 
+\setbeamertemplate{footline}{}
+\begin{frame}
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\end{column}
+\begin{column}{0.67\textwidth}  %%<--- here
+    \begin{center}
+	\begin{flushright} 	
+		\usebeamerfont{title}\usebeamercolor[fg]{title}\MakeUppercase\thesection. \insertsectionHEAD\par%
+	 \end{flushright}
+     \end{center}
+\end{column}
+\end{columns}
+\end{frame}
+}
+}
+
+
+
+%---------------------------------------------------------------------
+% Frametitle
+%---------------------------------------------------------------------
+\setbeamertemplate{frametitle}
+{\leavevmode
+\begin{beamercolorbox}[wd=\paperwidth,leftskip=0.3cm,rightskip=0.3cm,ht=4ex,dp=1ex]{frametitle}
+\usebeamerfont{frametitle}
+\MakeUppercase{\insertframetitle} \hfill \usebeamerfont{page number in head/foot}{\usebeamercolor[fg]{page number in head/foot}\insertframenumber} \hspace{0.5cm}
+\\\hspace{0.1cm}\usebeamerfont{framesubtitle} \insertframesubtitle
+\end{beamercolorbox}
+}
+
+%---------------------------------------------------------------------
+% Footline
+%---------------------------------------------------------------------
+\usenavigationsymbolstemplate{}
+\setbeamertemplate{footline}
+{\leavevmode
+	\hspace{0.5cm}	\includegraphics[width=1.75cm]{figures/imta_logo}\hfill  \usebeamerfont{title in head/foot}\insertshorttitle \hfill 
+ \usebeamerfont{title in head/foot}\insertdate\hspace{0.5cm}
+\vspace{0.5em}
+}
+
+
+
+%---------------------------------------------------------------------
+% Last page
+%---------------------------------------------------------------------
+
+\newcommand\makelast[2]{%
+        \setbeamertemplate{background canvas}{\includegraphics[width=\paperwidth,height=\paperheight]{figures/section}} 
+	
+	\setbeamertemplate{footline}{}
+	
+	\begin{frame}[plain]
+	\vspace{2em}	
+	\begin{flushright}
+	{\usebeamerfont{thanks}\usebeamercolor[fg]{thanks}#1}\\
+	\vspace{1em}
+	{\usebeamerfont{author}\usebeamercolor[fg]{author}#2}
+	\end{flushright}
+	\end{frame}
+}
+
+
+%---------------------------------------------------------------------
+% Blocks
+%---------------------------------------------------------------------
+\setbeamertemplate{block begin}
+{
+  \setbeamercolor{item}{parent=block body}
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex]{block title}
+    \usebeamerfont*{
+	    block title
+    }
+    \insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  {\nointerlineskip\vskip-0.5pt}%
+  \usebeamerfont{
+	  block body
+  }%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex,vmode]{block body}%
+}
+\setbeamertemplate{block end}  
+{\end{beamercolorbox}\vskip\smallskipamount}
+
+\setbeamertemplate{block alerted begin}
+{
+  \setbeamercolor{item}{parent=block body alerted}
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex]{block title alerted}
+    \usebeamerfont*{
+	    block title alerted
+    }
+    \insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  {\nointerlineskip\vskip-0.5pt}%
+  \usebeamerfont{
+	  block body alerted
+  }%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex,vmode]{block body alerted}%
+}
+\setbeamertemplate{block alerted end}
+{\end{beamercolorbox}\vskip\smallskipamount}
+
+\setbeamertemplate{block example begin}
+{
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex]{block title example}
+    \usebeamerfont
+    *{block title example}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  {\nointerlineskip\vskip-0.5pt}%
+  \usebeamerfont
+  {block body example}%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex,vmode]{block body example}%
+}
+\setbeamertemplate{block example end}
+{\end{beamercolorbox}\vskip\smallskipamount}
+
+\mode <all>
+
